@@ -1,6 +1,10 @@
-const C = 'oc-v1';
+const C = 'oc-202607250929';
 self.addEventListener('install', e => self.skipWaiting());
-self.addEventListener('activate', e => e.waitUntil(clients.claim()));
+self.addEventListener('activate', e => e.waitUntil((async () => {
+  const keys = await caches.keys();
+  await Promise.all(keys.filter(k => k !== C).map(k => caches.delete(k)));
+  await clients.claim();
+})()));
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   e.respondWith(
