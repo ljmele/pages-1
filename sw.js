@@ -1,4 +1,4 @@
-const C = 'oc-202609162301';
+const C = 'oc-202609162318';
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => e.waitUntil((async () => {
   const keys = await caches.keys();
